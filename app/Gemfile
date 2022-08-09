@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+# Gemfile
+
+source 'https://rubygems.org' do
+  gem 'aws-sdk-lambda'
+  gem 'sinatra'
+  gem 'sass'
+end
