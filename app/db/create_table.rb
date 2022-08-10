@@ -10,7 +10,6 @@ def table_created?(dynamodb_client, table_definition)
 rescue StandardError => e
   logger = Logger.new($stdout)
   logger.error("Error creating table: #{e.message}")
-  'Error'
   false
 end
 
@@ -27,7 +26,7 @@ def create_table(table_name, region = 'us-east-1')
         key_type: 'HASH'  # Partition key.
       },
       {
-        attribute_name: 'title',
+        attribute_name: 'date',
         key_type: 'RANGE' # Sort key.
       }
     ],
@@ -37,7 +36,7 @@ def create_table(table_name, region = 'us-east-1')
         attribute_type: 'S'
       },
       {
-        attribute_name: 'title',
+        attribute_name: 'date',
         attribute_type: 'S'
       }
     ],

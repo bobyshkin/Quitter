@@ -5,13 +5,11 @@ require 'json'
 require 'aws-sdk-lambda'
 
 class Invoker
-  def self.invoked?(function_name)
+  def self.invoked?(function_name, req_payload)
     logger = Logger.new($stdout)
     region = 'us-east-1'
     lambda_client = Aws::Lambda::Client.new(region: region)
 
-    # Get the 10 most recent items
-    req_payload = {:SortBy => 'time', :SortOrder => 'descending', :NumberToGet => 10}
     payload = JSON.generate(req_payload)
 
     logger.info("## Lambda function '#{function_name}' invoked.")
@@ -23,7 +21,7 @@ class Invoker
         payload: payload
       }
     )
-    if response.etag
+    if response
       logger.info("Lambda function '#{function_name}' invoked.")
     else
       logger.info("Lambda function '#{function_name}' not invoked.")
@@ -33,9 +31,10 @@ class Invoker
     false
   end
 
-  def self.invoke(function_name)
+  def self.invoke(function_name, payload)
     logger = Logger.new($stdout)
+    req_payload = payload
     logger.info("Invoking lambda function '#{function_name}'")
-    invoked?(function_name)
+    invoked?(function_name, req_payload)
   end
 end

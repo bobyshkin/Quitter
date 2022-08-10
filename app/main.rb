@@ -1,20 +1,19 @@
 # frozen_string_literal: true
 
 require 'sinatra'
-require_relative 'get_user_posts'
-require_relative 'aws_lambda_invoker'
+require_relative 'posts'
 
 get '/' do
   erb :index
 end
 
-get '/upload' do
-  invoke_lambda('upload_file_to_s3', 'some_goes_here_payload')
+post '/publish' do
+  Posts.put(params[:username], params[:text])
+  redirect '/'
 end
 
-put '/publish' do
-  User[session[:user]].tweet(params[:text])
-  redirect '/'
+get '/upload' do
+  invoke_lambda('upload_file_to_s3', 'some_goes_here_payload')
 end
 
 get '/styles.css' do

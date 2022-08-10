@@ -1,5 +1,7 @@
 <% posts.each do |post| %>
   <article class='post'>
-    <b><%= post['user_id'] %>:</b> <span class='text'><%= post['post']['message'] %></span>
+    <b><%= post['user_id'] %>:</b>
+    <span class='text'><%= post['date'].strftime("%Y-%m-%d %H:%M") %></span>
+    <span class='text'><%= post['post']['message'] %></span>
   </article>
 <% end %>
