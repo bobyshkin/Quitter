@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'sinatra'
+require_relative 'get_user_posts'
 require_relative 'aws_lambda_invoker'
 
 get '/' do
@@ -11,19 +12,11 @@ get '/upload' do
   invoke_lambda('upload_file_to_s3', 'some_goes_here_payload')
 end
 
-get '/publish' do
-  # GET User receive request form
-  erb :index, layout: :publish, locals: {
-    title: 'Post',
-    subtitle: 'Subtitle',
-    content: 'Content'
-  }
-end
-
 put '/publish' do
-  # PUT User data being posted
+  User[session[:user]].tweet(params[:text])
+  redirect '/'
 end
 
-get '/:user' do |value|
-  "Value: #{value}"
+get '/styles.css' do
+  sass :styles
 end

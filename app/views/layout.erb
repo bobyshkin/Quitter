@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <link rel='stylesheet' href='/styles.css'/>
+    <title>Quitter!</title>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Quitter!</h1>
+    </header>
+    <aside id='sidebar'>
+      <%= erb :sidebar %>
+    </aside>
+    <section id='main'>
+      <h1>Posts:</h1>
+      <%= erb :feed, locals: {posts: Posts.get} %>
+    </section>
+  </body>
+</html>

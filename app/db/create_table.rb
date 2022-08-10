@@ -34,7 +34,7 @@ def create_table(table_name, region = 'us-east-1')
     attribute_definitions: [
       {
         attribute_name: 'user_id',
-        attribute_type: 'N'
+        attribute_type: 'S'
       },
       {
         attribute_name: 'title',

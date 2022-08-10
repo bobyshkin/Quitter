@@ -24,7 +24,7 @@ def publish_user_post(region = 'us-east-1', table_name, user_id, title, message,
     item: {
       user_id: user_id,
       title: title,
-      info: {
+      post: {
         message: message,
         rating: rating
       }
@@ -38,9 +38,10 @@ def publish_user_post(region = 'us-east-1', table_name, user_id, title, message,
 end
 
 table_name = 'quitter-posts'
-user_id = 1001
-title = 'The Long Read Post'
-message = 'A post about something.'
-rating = 4.8
+user_id = 'King Julien'
+title = 'Little Froggy'
+message = 'Excuse me, little froggy. I believe you are a little confussed. I am the one who is telling the other animals what to do.'
+rating = 5.0
+
 
 publish_user_post(table_name, user_id, title, message, rating) if $PROGRAM_NAME == __FILE__

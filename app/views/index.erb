@@ -1,4 +1,5 @@
-<h1>Welcome to Quitter</h1>
+<h1>Welcome to Quitter</h1><hr>
 <p>This is my first app on Ruby</p>
 <a href="http://localhost:4567/upload">Upload</a>
-<a href="http://localhost:4567/publish">Publish</a>
+<a href="http://localhost:4567/publish">Create new post</a>
+<%= erb :feed, locals: {posts: Posts.get} %>

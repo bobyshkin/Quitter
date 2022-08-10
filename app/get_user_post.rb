@@ -6,11 +6,11 @@ require 'logger'
 def get_item_from_table(dynamodb_client, table_item)
   result = dynamodb_client.get_item(table_item)
   puts "#{result.item['title']} (#{result.item['user_id'].to_i}):"
-  puts "  Message: #{result.item['info']['message']}"
-  puts "  Rating: #{result.item['info']['rating'].to_i}"
+  puts "  Message: #{result.item['post']['message']}"
+  puts "  Rating: #{result.item['post']['rating'].to_i}"
 rescue StandardError => e
   logger = Logger.new($stdout)
-  logger.info("Error getting movie '#{table_item[:key][:title]} " \
+  logger.info("Error getting information '#{table_item[:key][:title]} " \
         "(#{table_item[:key][:user_id]})': #{e.message}")
 end
 
